@@ -1,38 +1,11 @@
-import express, { response } from 'express';
+import express from 'express';
+import routes from './routes';
 
 const app = express();
 
-const users = [
-    'Pedro',
-    'Diego',
-    'Rafael',
-    'João',
-    'Robson',
-    'Cleiton'
-]
+app.use(express.json());
+app.use(routes);
 
-app.get('/users', (request, response) => {
-    console.log('Listagem de usuários');
-
-    return response.json(users);
-
+app.listen(3333, () => {
+    console.log('🚀 Back-end started!');
 });
-
-app.get('/users/:id', (request, response) => {
-    const id = Number(request.params.id);
-
-    const user = users[id];
-
-    return response.json(user);
-});
-
-app.post('/users', (request, response) => {
-    const user = {
-        name: "Pedro",
-        email: "pedro@gmail.com"
-    };
-
-    return response.json(user);
-});
-
-app.listen(3333);
